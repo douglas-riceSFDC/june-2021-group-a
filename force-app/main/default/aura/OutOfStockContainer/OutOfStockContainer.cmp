@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForAllPageTypes" controller="TitleAuraService">
+
+    <aura:attribute name="titles" type="Title__c[]" default=""></aura:attribute>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"></aura:handler>
+
+    <c:OutOfStockTable titles="{!v.titles}"></c:OutOfStockTable>
+    
+</aura:component>

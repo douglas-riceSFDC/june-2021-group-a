@@ -1,0 +1,29 @@
+<aura:component>
+
+<aura:attribute name="titles" type="Title__c[]" default=""></aura:attribute>
+
+<lightning:card>
+
+    <table class="slds-table_cell-buffer slds-table slds-table_bordered">
+        <thead>
+            <tr>
+                <th>Out of Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <aura:iteration items="{!v.titles}" var="title">
+
+                <tr>
+                    <td>
+                        {!title.Name}
+                    </td>
+                </tr>
+
+            </aura:iteration>
+
+        </tbody>
+    </table>
+</lightning:card>
+
+</aura:component>
