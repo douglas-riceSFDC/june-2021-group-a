@@ -1,3 +1,12 @@
 <template>
     <h1>Hello World!</h1>
+    <template if:true={isInStock}>
+        <lightning-button variant="brand" label="Rent"
+                        title="Primary action" onclick={handleRentalClick}
+                        class="slds-m-left_x-small"></lightning-button>
+    </template>
+    <template if:false={isInStock}>
+        <lightning-button variant="brand" label="Rent" title="Primary action"
+                        disabled class="slds-m-left_x-small"></lightning-button>
+    </template>
 </template>
