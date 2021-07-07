@@ -21,7 +21,10 @@ public with sharing class MovieDatabaseService {
         for (Title__c title : titlesToUpdate) {
             Http http = new Http();
             HttpRequest request = new HttpRequest();
-            request.setEndpoint('https://www.omdbapi.com/?t=' + title.Name + '&apikey=4bfd514c');
+
+            String titleName = title.Name;
+
+            request.setEndpoint('https://www.omdbapi.com/?t=' + titleName.replace(' ', '+') + '&apikey=4bfd514c');
             request.setMethod('GET');
 
             HttpResponse response = http.send(request);
