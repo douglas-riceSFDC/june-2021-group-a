@@ -1,5 +1,12 @@
 <template>
-    <h1>Hello World!</h1>
+    <lightning-record-view-form
+        record-id={recordId}
+        object-api-name={titleObject}>
+        <div>
+            <lightning-formatted-text value={name} class="slds-text-heading_large">
+            </lightning-formatted-text>
+        </div>
+    </lightning-record-view-form>>
     <template if:true={isInStock}>
         <lightning-button variant="brand" label="Rent"
                         title="Primary action" onclick={handleRentalClick}
