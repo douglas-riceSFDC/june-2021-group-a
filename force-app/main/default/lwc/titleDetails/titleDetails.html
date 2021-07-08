@@ -1,0 +1,46 @@
+<template>
+    <div class="slds-grid slds-border_bottom slds-var-p-around_medium">
+        <div class="slds-col slds-size_1-of-2">
+            <lightning-formatted-text value={name} class="slds-text-heading_large">
+            </lightning-formatted-text>
+            <lightning-formatted-text value={availableStock}>
+            </lightning-formatted-text>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <template if:true={isInStock}>
+                <div class="slds-clearfix">
+                    <lightning-button variant="brand" label="Rent"
+                                    title="Primary action" onclick={handleRentalClick}
+                                    class="slds-var-m-right_large slds-float_right">
+                    </lightning-button>
+                </div>
+            </template>
+            <template if:false={isInStock}>
+                <div class="slds-clearfix">
+                    <lightning-button variant="brand" label="Rent" title="Primary action"
+                    disabled class="slds-var-m-right_large slds-float_right slds-var-p-left_medium">
+                    </lightning-button>
+                    <lightning-formatted-text value="Out of Stock" class="outOfStock slds-float_right">
+                    </lightning-formatted-text>
+                </div>
+            </template>
+        </div>
+    </div>
+    <div class="slds-grid slds-border_bottom slds-var-p-around_medium">
+        <div class="slds-col slds-size_1-of-2">
+            <img src={poster} alt={name} />
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+                <lightning-record-view-form record-id={recordId} object-api-name={titleObject}>
+                <lightning-output-field field-name="Genre__c"></lightning-output-field>
+                <lightning-output-field field-name="Release_Date__c"></lightning-output-field>
+                <lightning-output-field field-name="Runtime__c"></lightning-output-field>
+                <lightning-output-field field-name="Notable_Actors__c"></lightning-output-field>
+                <lightning-output-field field-name="Plot_Description__c"></lightning-output-field>
+                <lightning-output-field field-name="Director__c"></lightning-output-field>
+                <lightning-output-field field-name="Writer__c"></lightning-output-field>
+                <lightning-output-field field-name="Language__c"></lightning-output-field>
+            </lightning-record-view-form>
+        </div>
+    </div>
+</template>
