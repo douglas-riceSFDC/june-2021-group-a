@@ -1,0 +1,34 @@
+<template>
+    <lightning-card title={TitleId.Name}>
+        <lightning-button label="View Details" slot="actions" onclick={NavigateToViewDetailsPage}></lightning-button>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Director">Director</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Writer">Writer(s)</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Notable Actors">Notable Actors</div>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr class="slds-card__body slds-card__body_inner">
+                    <td class="slds-form-element slds-size--1-of-3 td-fixed-width">
+                        <div class="slds-cell-wrap">{TitleId.Director__c}</div>
+                    </td>
+                    <td class="slds-form-element slds-size--1-of-3 td-fixed-width">
+                        <div class="slds-cell-wrap">{TitleId.Writer__c}</div>
+                    </td>
+                    <td class="slds-form-element slds-size--1-of-3 td-fixed-width">
+                        <div class="slds-cell-wrap">{TitleId.Notable_Actors__c}</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </lightning-card>
+</template>
