@@ -3,8 +3,8 @@
 		<template for:each={titles} for:item="title">
 			<div key={title.Id} class="slds-col slds-size_1-of-3 slds-var-p-around_small">
 				<c-title-card title={title}>
-					<img class="thumbnail" src={title.Thumbnail__c} alt={title.Name} />
-					<p>{title.Genre__c}</p>
+					<img class="poster" src={title.Poster__c} alt={title.Name} />
+					<p>{title.Name}</p>
 				</c-title-card>
 			</div>
 		</template>

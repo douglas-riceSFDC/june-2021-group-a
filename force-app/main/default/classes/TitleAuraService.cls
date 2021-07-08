@@ -1,12 +1,11 @@
 public with sharing class TitleAuraService {
+  
   @AuraEnabled
-  public static List<Title__c> getLatestTitles(Integer limiter) {
+  public static List<Title__c> getLatestTitles() {
     return [
       SELECT Name, Genre__c, Thumbnail__c, Available_Stock__c, Total_Stock__c
       FROM Title__c
-      ORDER BY CreatedDate DESC
-      LIMIT :limiter
-    ];
+      ORDER BY CreatedDate DESC];
   }
 
   @AuraEnabled

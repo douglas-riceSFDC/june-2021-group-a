@@ -5,9 +5,14 @@
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>
+        <target>lightningCommunity__Page</target>
+        <target>lightningCommunity__Default</target>
     </targets>
     <targetConfigs>
         <targetConfig targets="lightning__HomePage">
+            <property name="limit" type="Integer" default="5" label="Title Limit"/>
+        </targetConfig>
+        <targetConfig targets="lightningCommunity__Default">
             <property name="limit" type="Integer" default="5" label="Title Limit"/>
         </targetConfig>
     </targetConfigs>
