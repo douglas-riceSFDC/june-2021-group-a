@@ -36,7 +36,8 @@ public with sharing class TitleAuraService {
   @AuraEnabled
   public static List<Movie_Review__c> getTitleReviews(ID titleId) {
     return [
-        SELECT Name, Rating__c, Review__c, Reviewer__c, Title__c
+        SELECT Name, Rating__c, Review__c, Reviewer__r.Name, 
+               Reviewer__r.MediumPhotoURL, Title__c
         FROM Movie_Review__c
         WHERE Title__c = :titleId
     ];
