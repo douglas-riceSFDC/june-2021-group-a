@@ -1,7 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 export default class AdvancedSearchCard extends NavigationMixin(LightningElement) {
-    //@api recordId;
     @api TitleId;
     //recordPageUrl;
     NavigateToViewDetailsPage(){
