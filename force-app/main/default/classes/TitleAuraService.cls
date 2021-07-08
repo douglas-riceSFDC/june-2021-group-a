@@ -19,18 +19,15 @@ public with sharing class TitleAuraService {
     ];
   }
 
-  // @AuraEnabled
-  // public static List<Rental__c> rentTitle(Title__c title) {
+  @AuraEnabled
+  public static void rentTitle(ID titleId) {
 
-  //     List<Rental__c> newRentals = new List<Rental__c>();
-  //     List<Stock__c> availableStock = [SELECT Name, Status__c, Title__c
-  //                                      FROM Stock__c
-  //                                      WHERE Status__c LIKE 'Available'
-  //                                      AND Title__c = :title.Id];
-  //     newRentals.add(new Rental__c(Stock__c = availableStock[0].Id));
-  //     availableStock[0].Status__c = 'Rented';
-  //     update availableStock;
-  //     insert newRentals;
-  //     return newRentals;
-  // }
+      Stock__c availableStock = [SELECT Name, Status__c, Title__c
+                                       FROM Stock__c
+                                       WHERE Status__c LIKE 'Available'
+                                       AND Title__c = :titleId
+                                       LIMIT 1];
+      availableStock.Status__c = 'Rented';
+      update availableStock;
+  }
 }

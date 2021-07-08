@@ -50,13 +50,30 @@ export default class TitleDetails extends LightningElement {
     }
 
     handleRentalClick() {
-        // let rentalNumber = rentTitle(this.title)[0].Name;
-        const toastEvent = new ShowToastEvent({
-            title: "Movie Rented!",
-            message: "Rental: " /* + rentalNumber */,
-            variant: "success"
-        });
-        this.dispatchEvent(toastEvent);
+
+        let toastTitle = "",
+            toastMessage = "",
+            toastVariant = "";
+
+        rentTitle({titleId: this.recordId})
+            .then(() => {
+                    toastTitle = "Movie Rented!";
+                    toastMessage = "See 'My Rentals' for details.";
+                    toastVariant = "success";
+            })
+            .catch(() => {
+                    toastTitle = "Rental failed";
+                    toastMessage = "Rental not generated.";
+                    toastVariant = "error";
+            })
+            .finally(() => {
+                const toastEvent = new ShowToastEvent({
+                    title: toastTitle,
+                    message: toastMessage,
+                    variant: toastVariant
+                });
+                this.dispatchEvent(toastEvent);
+            });
     };
 
 }
