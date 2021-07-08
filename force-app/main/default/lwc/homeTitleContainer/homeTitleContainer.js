@@ -9,9 +9,10 @@ export default class HomeTitleContainer extends LightningElement {
         getLatestTitles({ limiter: this.limit})
             .then(result => {
                 this.titles = result;
+                console.log(result);
             })
             .catch(error => {
-                console.error('Error occured'. error);
+                console.error('Error occured', error);
             });
     }
 }
