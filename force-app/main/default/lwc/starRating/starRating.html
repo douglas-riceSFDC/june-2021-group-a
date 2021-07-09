@@ -1,0 +1,44 @@
+<template>
+    <template if:true={isFiveStar}>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+    </template>
+    <template if:true={isFourStar}>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+    </template>
+    <template if:true={isThreeStar}>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+    </template>
+    <template if:true={isTwoStar}>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+    </template>
+    <template if:true={isOneStar}>
+        <lightning-icon icon-name="utility:favorite" variant="warning"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+    </template>
+    <template if:true={isZeroStar}>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+        <lightning-icon icon-name="utility:favorite"></lightning-icon>
+    </template>
+</template>

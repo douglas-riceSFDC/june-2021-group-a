@@ -10,14 +10,7 @@
                                 title="Primary action" onclick={handleReviewButtonClick}
                                 class="slds-var-m-right_large slds-float_right slds-var-p-left_large">
                 </lightning-button>
-                <!-- <lightning-icon icon-name="utility:favorite" class="slds-float_right"></lightning-icon>
-                <lightning-icon icon-name="utility:favorite" class="slds-float_right"></lightning-icon>
-                <lightning-icon icon-name="utility:favorite" class="slds-float_right"></lightning-icon>
-                <lightning-icon icon-name="utility:favorite" class="slds-float_right"></lightning-icon>
-                <lightning-icon icon-name="utility:favorite" class="slds-float_right"></lightning-icon> -->
-                <lightning-formatted-number value={averageUserRating}
-                                class="slds-text-heading_small slds-float_right slds-var-p-right_large">
-                </lightning-formatted-number>
+                <c-star-rating rating={averageUserRating} class="slds-float_right"></c-star-rating>
                 <lightning-formatted-text value="Average Rating: "
                                 class="slds-text-heading_small slds-float_right slds-var-p-right_large">
                 </lightning-formatted-text>
@@ -37,14 +30,7 @@
                         </lightning-formatted-text>
                     </div>
                     <div slot="actions">
-                        <lightning-formatted-number value={review.Rating__c}
-                                class="slds-text-heading_small slds-float_right slds-var-p-right_large">
-                        </lightning-formatted-number>
-                        <!-- <lightning-icon icon-name="utility:favorite" class="slds-float_right"></lightning-icon>
-                        <lightning-icon icon-name="utility:favorite" class="slds-float_right"></lightning-icon>
-                        <lightning-icon icon-name="utility:favorite" class="slds-float_right"></lightning-icon>
-                        <lightning-icon icon-name="utility:favorite" class="slds-float_right"></lightning-icon>
-                        <lightning-icon icon-name="utility:favorite" class="slds-float_right"></lightning-icon> -->
+                        <c-star-rating rating={review.Rating__c}></c-star-rating>
                     </div>
                     <div>
                         <lightning-formatted-text value={review.Review__c} class="slds-text-body_regular slds-var-p-around_medium">

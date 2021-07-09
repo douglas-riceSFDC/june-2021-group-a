@@ -10,7 +10,7 @@ export default class ReviewList extends LightningElement {
     title;
 
     get averageUserRating() {
-        return this.title.data ? getFieldValue(this.title.data, AVERAGE_USER_RATING_FIELD) : '';
+        return this.title.data ? getFieldValue(this.title.data, AVERAGE_USER_RATING_FIELD) : 'No data';
     }
 
     connectedCallback() {
