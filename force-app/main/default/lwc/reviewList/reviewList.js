@@ -1,21 +1,22 @@
+import { LightningElement, api, track, wire } from 'lwc';
+import { getFieldValue, getRecord } from 'lightning/uiRecordApi';
 import getTitleReviews from '@salesforce/apex/TitleAuraService.getTitleReviews';
-import { LightningElement, api, track } from 'lwc';
+import AVERAGE_USER_RATING_FIELD from '@salesforce/schema/Title__c.Average_User_Rating__c'
 
 export default class ReviewList extends LightningElement {
     @api recordId;
     @track reviews;
-    @track averageRating;
+    @wire(getRecord, { recordId: '$recordId', fields: [AVERAGE_USER_RATING_FIELD] })
+    title;
+
+    get averageUserRating() {
+        return this.title.data ? getFieldValue(this.title.data, AVERAGE_USER_RATING_FIELD) : '';
+    }
 
     connectedCallback() {
         getTitleReviews({ titleId: this.recordId})
             .then(result => {
                 this.reviews = result;
-
-                let ratings = [];
-                for (const review in this.reviews) {
-                    ratings.push(review.Rating__c)
-                }
-                this.averageRating = ratings.reduce((total, current) => total + current) / ratings.length;
             })
             .catch(error => {
                 console.error('Error occured', error);

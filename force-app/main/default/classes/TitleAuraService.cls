@@ -1,11 +1,10 @@
 public with sharing class TitleAuraService {
   @AuraEnabled
-  public static List<Title__c> getLatestTitles(Integer limiter) {
+  public static List<Title__c> getLatestTitles() {
     return [
-        SELECT Name, Genre__c, Thumbnail__c, Available_Stock__c, Total_Stock__c
+        SELECT Name, Genre__c, Poster__c, Available_Stock__c, Total_Stock__c
         FROM Title__c
         ORDER BY CreatedDate DESC
-        LIMIT :limiter
     ];
   }
 
@@ -36,10 +35,25 @@ public with sharing class TitleAuraService {
   @AuraEnabled
   public static List<Movie_Review__c> getTitleReviews(ID titleId) {
     return [
-        SELECT Name, Rating__c, Review__c, Reviewer__r.Name, 
-               Reviewer__r.MediumPhotoURL, Title__c
+        SELECT Name, Rating__c, Review__c, Reviewer__r.Name,
+        Reviewer__r.MediumPhotoURL, Title__c, Title__r.Average_User_Rating__c
         FROM Movie_Review__c
         WHERE Title__c = :titleId
     ];
   }
+
+  @AuraEnabled (cacheable = true)
+    public static List<Title__c> getFilteredTitles(String filters){
+
+        String whereClause = '';
+        String query = 'SELECT Name, Genre__c, Poster__c, Available_Stock__c,Total_Stock__c, Release_Date__c  FROM Title__c';
+
+        if(filters != 'All'){
+            whereClause = ' WHERE Genre__c INCLUDES(\'' + filters + '\')';
+        }
+
+        System.debug(query + whereClause);
+
+        return Database.query( query + whereClause );
+    }
 }
