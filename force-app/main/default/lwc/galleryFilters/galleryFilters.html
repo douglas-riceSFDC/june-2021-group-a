@@ -1,0 +1,20 @@
+<template>
+    <section>
+        <lightning-combobox
+            name="SortBy"
+            value={sort}
+            placeholder="Sort By"
+            options={sortOptions}
+            onchange={handleChange}>
+        </lightning-combobox>
+    </section>      
+    <section>
+        <lightning-combobox
+            name="Genre"
+            value={genre}
+            placeholder="Genre"
+            options={genreOptions}
+            onchange={handleChange}>
+        </lightning-combobox>
+    </section>   
+</template>
