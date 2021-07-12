@@ -1,14 +1,14 @@
 public with sharing class AdvancedSearchController {
     @AuraEnabled(cacheable=true)
     public static list<Title__c> getMovieList(string searchKey) {
-        string searchKeyword = '%' + searchKey + '%';
+        String searchKeyword = '%' + searchKey + '%';
 		
        // create movie list to store search result 
-        list<Title__c> movieListRecord = new list<Title__c>();
+        List<Title__c> movieListRecord = new list<Title__c>();
      
 	   // query movie records
-        for(Title__c titleObj : [Select id,Name,Director__c,Writer__c,Notable_Actors__c
-                            From Title__c
+        for(Title__c titleObj : [SELECT id,Name,Director__c,Writer__c,Notable_Actors__c
+                            FROM Title__c
                             WHERE name LIKE : searchKeyword OR Director__c LIKE : searchKeyword OR 
                             Writer__c LIKE : searchKeyword OR Notable_Actors__c LIKE : searchKeyword]){
                                 movieListRecord.add(titleObj);
