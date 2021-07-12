@@ -1,6 +1,6 @@
 public with sharing class AdvancedSearchController {
     @AuraEnabled(cacheable=true)
-    public static list<Title__c> getMovieList(string searchKey) {
+    public static list<Title__c> getMovieList(String searchKey) {
         String searchKeyword = '%' + searchKey + '%';
 		
        // create movie list to store search result 
