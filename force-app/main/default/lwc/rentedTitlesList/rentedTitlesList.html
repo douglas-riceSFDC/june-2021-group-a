@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Current Rentals" icon-name="standard:orders">
+        <div class="slds-m-around_medium">
+            <template if:true={rentals.data}>
+                <template for:each={rentals.data} for:item="rental">
+                    <div key={rental.Id} class="slds-grid slds-gutters slds-border_bottom">
+                        <div class='slds-col slds-size_5-of-12'>
+                            <img class="slds-m-top_x-small slds-m-bottom_x-small" src={rental.Title_Poster__c} alt={rental.Title_Name__c}/>
+                        </div>
+                        <div class='slds-col slds-size_7-of-12'>
+                            <div key={rental.Id} class="slds-text-heading_small slds-m-top_x-small slds-m-bottom_medium">{rental.Title_Name__c}</div>
+                            <template if:true={rental.Overdue__c}>
+                                <div key={rental.Id} class="slds-m-bottom_medium slds-text-color_destructive">OVERDUE: {rental.Due_Date__c}</div>
+                            </template>
+                            <template if:false={rental.Overdue__c}>
+                                <div key={rental.Id} class="slds-m-bottom_medium">Due: {rental.Due_Date__c}</div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>
