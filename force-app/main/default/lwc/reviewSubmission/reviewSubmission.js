@@ -1,9 +1,11 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
+import uId from '@salesforce/user/Id';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import generateMovieReview from '@salesforce/apex/MovieReviewAuraService.generateMovieReview';
 
 export default class ReviewSubmission extends LightningElement {
+    @api title;
     @track isMenuOpen = false;
-    @track reviewText;
-    @track reviewRating;
 
     handleReviewButtonClick() {
         this.isMenuOpen = true;
@@ -14,23 +16,37 @@ export default class ReviewSubmission extends LightningElement {
     }
 
     handleSubmitButtonClick() {
-        // Generate Review
-        console.log(this.reviewRating);
-        console.log(this.reviewText);
-        // Display toast msg
 
-        this.isMenuOpen = false;
-        // this.reviewText = "";
-        // this.reviewRating = "";
-        location.reload();
+        const ratingInput = this.template.querySelector('.rating-input');
+        const reviewInput = this.template.querySelector('.review-input');
+
+        if (ratingInput.validity.valid && reviewInput.validity.valid) {
+            generateMovieReview({
+                titleId: this.title,
+                reviewerId: uId,
+                review: reviewInput.value,
+                rating: ratingInput.value
+            })
+            .then( () => {
+                location.reload();
+            })
+            .catch((error) => {
+                const toastEvent = new ShowToastEvent({
+                    title: "Submission failed",
+                    message: error.body.pageErrors[0].message,
+                    variant: "error"
+                });
+                this.dispatchEvent(toastEvent);
+            });
+            this.isMenuOpen = false;
+        }
+        else {
+            const toastEvent = new ShowToastEvent({
+                title: "Submission failed",
+                message: "Please update the invalid form entries and try again.",
+                variant: "error"
+            });
+            this.dispatchEvent(toastEvent);
+        }
     }
-
-    changeText(event) {
-        this.reviewText = event.target.value;
-    }
-
-    changeRating(event) {
-        this.reviewRating = event.target.value;
-    }
-
 }
