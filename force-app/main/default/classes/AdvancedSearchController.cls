@@ -4,7 +4,7 @@ public with sharing class AdvancedSearchController {
         String searchKeyword = '%' + searchKey + '%';
 		
        // create movie list to store search result 
-        List<Title__c> movieListRecord = new list<Title__c>();
+        List<Title__c> movieListRecord = new List<Title__c>();
      
 	   // query movie records
         for(Title__c titleObj : [SELECT id,Name,Director__c,Writer__c,Notable_Actors__c
