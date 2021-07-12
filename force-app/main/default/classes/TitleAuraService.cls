@@ -32,28 +32,33 @@ public with sharing class TitleAuraService {
     update availableStock;
   }
 
-  @AuraEnabled
-  public static List<Movie_Review__c> getTitleReviews(ID titleId) {
-    return [
-        SELECT Name, Rating__c, Review__c, Reviewer__r.Name,
-        Reviewer__r.MediumPhotoURL, Title__c, Title__r.Average_User_Rating__c
-        FROM Movie_Review__c
-        WHERE Title__c = :titleId
-    ];
-  }
-
   @AuraEnabled (cacheable = true)
-    public static List<Title__c> getFilteredTitles(String filters){
+    public static List<Title__c> getFilteredTitles(String filters, String sortBy){
 
+        String query = 'SELECT Name, Genre__c, Poster__c, Available_Stock__c,Total_Stock__c, Release_Date__c, Date_Released__c, Average_User_Rating__c  FROM Title__c';
         String whereClause = '';
-        String query = 'SELECT Name, Genre__c, Poster__c, Available_Stock__c,Total_Stock__c, Release_Date__c  FROM Title__c';
+        String sortCriteria = '';
+        String orderBy = '';
 
+
+        if(sortBy != ''){
+
+          if(sortBy == 'highestRated'){
+            sortCriteria = 'Average_User_Rating__c';
+          } 
+          else if(sortBy == 'release'){
+            sortCriteria = 'Date_Released__c';
+          }      
+          orderBy = ' ORDER BY ' + sortCriteria + ' DESC';  
+        }
+       
         if(filters != 'All'){
             whereClause = ' WHERE Genre__c INCLUDES(\'' + filters + '\')';
         }
 
-        System.debug(query + whereClause);
+        List<Title__c> titleList = new List<Title__c>();
 
-        return Database.query( query + whereClause );
+        titleList = Database.query(query + whereClause + orderBy);
+        return titleList;
     }
 }

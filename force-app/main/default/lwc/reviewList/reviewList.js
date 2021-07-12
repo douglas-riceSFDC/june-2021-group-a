@@ -1,6 +1,6 @@
 import { LightningElement, api, track, wire } from 'lwc';
 import { getFieldValue, getRecord } from 'lightning/uiRecordApi';
-import getTitleReviews from '@salesforce/apex/TitleAuraService.getTitleReviews';
+import getTitleReviews from '@salesforce/apex/MovieReviewAuraService.getTitleReviews';
 import AVERAGE_USER_RATING_FIELD from '@salesforce/schema/Title__c.Average_User_Rating__c'
 
 export default class ReviewList extends LightningElement {
