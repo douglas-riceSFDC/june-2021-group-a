@@ -1,17 +1,35 @@
-import { LightningElement, api, track } from 'lwc';
-import getLatestTitles from '@salesforce/apex/TitleAuraService.getLatestTitles';
+import { LightningElement, api, track , wire} from 'lwc';
+import getFilteredTitles from '@salesforce/apex/TitleAuraService.getFilteredTitles';
+
+import { subscribe, MessageContext } from 'lightning/messageService';
+import MOVIES_FILTERED_MESSAGE from '@salesforce/messageChannel/Movies_Filtered__c';
 
 export default class HomeTitleContainer extends LightningElement {
-    @api limit;
-    @track titles;
+ 
+    @api limit = 5;
+    @track filters = 'All';
+    @track sortBy = '';
+    @track moviesFilterSubscription;
+    @wire (MessageContext)
+    messageContext;
 
-    connectedCallback() {
-        getLatestTitles({ limiter: this.limit})
-            .then(result => {
-                this.titles = result;
-            })
-            .catch(error => {
-                console.error('Error occured'. error);
-            });
+    @wire(getFilteredTitles,{ filters: '$filters' , sortBy: '$sortBy' })
+    titles;
+
+    sortedTitles
+
+    connectedCallback(){
+
+        this.moviesFilterSubscription = subscribe(
+            this.messageContext,
+            MOVIES_FILTERED_MESSAGE,
+            (message) => this.handleFilterChange(message)
+        );
+        
+    }
+
+    handleFilterChange(message){
+        this.filters = message.filters.filters;
+        this.sortBy = message.filters.sortBy;  
     }
 }
