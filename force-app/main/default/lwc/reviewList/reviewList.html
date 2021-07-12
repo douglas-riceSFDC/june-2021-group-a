@@ -6,11 +6,10 @@
         </div>
         <div class="slds-col slds-size_1-of-2">
             <div class="slds-clearfix">
-                <lightning-button variant="brand-outline" label="Leave a Review!"
-                                title="Primary action" onclick={handleReviewButtonClick}
-                                class="slds-var-m-right_large slds-float_right slds-var-p-left_large">
-                </lightning-button>
+                <c-review-submission></c-review-submission>
                 <c-star-rating rating={averageUserRating} class="slds-float_right"></c-star-rating>
+                <lightning-formatted-number value={averageUserRating} class="slds-text-body_regular slds-var-p-around_medium">
+                </lightning-formatted-number>
                 <lightning-formatted-text value="Average Rating: "
                                 class="slds-text-heading_small slds-float_right slds-var-p-right_large">
                 </lightning-formatted-text>
