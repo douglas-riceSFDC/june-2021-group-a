@@ -1,7 +1,7 @@
 import { LightningElement, api, track} from 'lwc';
 
 export default class StarRating extends LightningElement {
-    @api rating = 0;
+    @api rating;
     @track isFiveStar = false;
     @track isFourStar = false;
     @track isThreeStar = false;
@@ -10,7 +10,6 @@ export default class StarRating extends LightningElement {
     @track isZeroStar = false;
 
     connectedCallback() {
-        console.log('Rating = ' + this.rating);
         switch (this.rating) {
             case 5:
                 this.isFiveStar = true;

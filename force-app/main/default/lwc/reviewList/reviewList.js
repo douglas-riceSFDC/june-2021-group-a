@@ -9,10 +9,7 @@ export default class ReviewList extends LightningElement {
     @wire(getRecord, { recordId: '$recordId', fields: AVERAGE_USER_RATING_FIELD })
     title;
 
-    get averageUserRating() {
-        console.log(this.title.data);
-        return this.title.data ? getFieldValue(this.title.data, AVERAGE_USER_RATING_FIELD) : 0 ;
-    }
+    get averageUserRating() { return this.title.data ? getFieldValue(this.title.data, AVERAGE_USER_RATING_FIELD) : 0 ; }
 
     connectedCallback() {
         getTitleReviews({ titleId: this.recordId})
