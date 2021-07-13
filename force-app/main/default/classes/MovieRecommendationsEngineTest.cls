@@ -1,7 +1,9 @@
 @isTest
 private class MovieRecommendationsEngineTest {
+    @TestSetup
+    static void createTestData() {
+        Test.setMock(HttpCalloutMock.class, new MovieDatabaseServiceMock());
 
-    public List<Rental__c> createTestData() {
         List<Title__c> titles = new List<Title__c>();
 
         Title__c inception = new Title__c(Name='Inception');
@@ -20,6 +22,9 @@ private class MovieRecommendationsEngineTest {
         Stock__c ironmanStock = new Stock__c(Title__c = titles[1].Id);
         Stock__c notebookStock = new Stock__c(Title__c = titles[2].Id);
 
+        stocks.add(inceptionStock);
+        stocks.add(ironmanStock);
+        stocks.add(notebookStock);
         insert stocks;
 
         Rental__c newRental = new Rental__c(
@@ -28,14 +33,21 @@ private class MovieRecommendationsEngineTest {
         );
 
         insert newRental;
-
-        return newRental;
     }
 
     @isTest
     static void getRecommendationsTest_givenGenre_expectedTitlesWithGenres() {
-        List<Rental__c> rentals = createTestData();
-
         
+        // Rental__c rentals = createTestData();
+
+        // for (Title__c t : [SELECT Genre__c, Name FROM Title__c]) {
+        //     System.debug(t.Name);
+        //     System.debug(t.Genre__c);
+        // }
+        Test.startTest();
+        MovieRecommendationsEngine.getRecommendedMovies();
+        Test.stopTest();
+
+
     }
 }

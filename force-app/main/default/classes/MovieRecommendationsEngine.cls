@@ -1,17 +1,12 @@
 public with sharing class MovieRecommendationsEngine {
-    @AuraEnabled
+    @AuraEnabled (cacheable = true)
     public static List<Title__c> getRecommendedMovies(){
-        List<String> rentedGenres = getRentedGenres();
+        String rentedGenres = getRentedGenres();
         List<Title__c> rentedTitles = getRentedTitles();
 
-        List<Title__c> similarTitles = [SELECT
-                                            Id,
-                                            Name,
-                                            Genre__c
-                                            FROM Title__c
-                                            WHERE Genre__c INCLUDES (:rentedGenres)
-                                        ];
-        
+        String queryString = 'SELECT Id, Name, Genre__c FROM Title__c WHERE Genre__c INCLUDES (' + rentedGenres + ')';
+
+        List<Title__c> similarTitles = Database.query(queryString);
         for (Title__c rentedTitle : rentedTitles) {
             if (similarTitles.contains(rentedTitle)) {
                 similarTitles.remove(similarTitles.indexOf(rentedTitle));
@@ -21,17 +16,17 @@ public with sharing class MovieRecommendationsEngine {
         return similarTitles;
     }
 
-    private static List<String> getRentedGenres() {
+    private static String getRentedGenres() {
         List<Title__c> rentedTitles = getRentedTitles();
         
-        List<String> rentedGenres = new List<String>();
+        String includesRentalStr = '';
 
         for (Title__c title : rentedTitles) {
             String genres = title.Genre__c;
-            rentedGenres.add(genres);
+            includesRentalStr = includesRentalStr + '\'' + genres.replace(';', '\',\'') + '\',';
         }
-
-        return rentedGenres;
+        
+        return includesRentalStr.substring(0, includesRentalStr.length() - 1);
     }
 
     private static List<Title__c> getRentedTitles() {
@@ -45,7 +40,7 @@ public with sharing class MovieRecommendationsEngine {
                                     WHERE Customer__c = :uid
                                 ];
         List<String> rentedTitleNames = new List<String>();
-        
+
         for (Rental__c rental : rentals) {
             rentedTitleNames.add(rental.Title_Name__c);
         }
@@ -57,7 +52,6 @@ public with sharing class MovieRecommendationsEngine {
                                         FROM Title__c
                                         WHERE Name IN :rentedTitleNames
                                     ];
-        
         return rentedTitles;
     }
 }
