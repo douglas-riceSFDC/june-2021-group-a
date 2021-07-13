@@ -1,0 +1,8 @@
+<template>
+    <template if:true={isInteractive}>
+        <c-star-rating-interactive></c-star-rating-interactive>
+    </template>
+    <template if:false={isInteractive}>
+        <c-star-rating rating={rating}></c-star-rating>
+    </template>
+</template>
