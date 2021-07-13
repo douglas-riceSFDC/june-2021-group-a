@@ -1,4 +1,6 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, wire } from 'lwc';
+import { MessageContext, publish } from 'lightning/messageService';
+import SELECTED_RATING_MC from '@salesforce/messageChannel/Selected_Rating__c'
 
 export default class StarRatingInteractive extends LightningElement {
     @track selectedRating;
@@ -7,6 +9,8 @@ export default class StarRatingInteractive extends LightningElement {
     @track starState3 = "default";
     @track starState4 = "default";
     @track starState5 = "default";
+
+    @wire (MessageContext) messageContext;
 
     handleRatingHover(event) {
         switch(event.target.getAttribute('data-id')) {
@@ -117,5 +121,8 @@ export default class StarRatingInteractive extends LightningElement {
             default:
                 break;
         }
+
+        const payload = {rating: this.selectedRating};
+        publish(this.messageContext, SELECTED_RATING_MC, payload);
     }
 }
