@@ -1,5 +1,5 @@
 <template>
-    <lightning-button
+    <lightning-button 
             variant="brand-outline"
             label="Leave a Review!"
             title="Primary action"
@@ -15,13 +15,13 @@
             class="slds-modal slds-fade-in-open">
             <div class="slds-modal__container">
                 <header class="slds-modal__header">
-                    <button
-                        class="slds-button slds-button_icon
+                    <button 
+                        class="slds-button slds-button_icon 
                                 slds-modal__close slds-button_icon-inverse"
                         title="Close">
                         <span class="slds-assistive-text">Close</span>
                     </button>
-                    <h2
+                    <h2 
                         id="modal-heading-01"
                         class="slds-modal__title slds-hyphenate">
                         Review Submission Form
@@ -40,24 +40,54 @@
                         class="review-input"
                         required>
                     </lightning-textarea>
-                    <lightning-input
-                        type="number"
-                        name="reviewRating"
-                        label="Enter rating (1-5)"
-                        formatter="decimal"
-                        step="1" min="1" max="5"
-                        message-when-value-missing="Please add a rating (1-5)."
-                        class="rating-input"
-                        required>
-                    </lightning-input>
+                    <lightning-icon 
+                        icon-name="utility:favorite" 
+                        variant={starState1}
+                        onmouseover={handleRatingHover}
+                        onmouseout={handleRatingHoverOut}
+                        onclick={handleRatingClick}
+                        data-id="star1">
+                    </lightning-icon>
+                    <lightning-icon 
+                        icon-name="utility:favorite" 
+                        variant={starState2}
+                        onmouseover={handleRatingHover}
+                        onmouseout={handleRatingHoverOut}
+                        onclick={handleRatingClick}
+                        data-id="star2">
+                    </lightning-icon>
+                    <lightning-icon 
+                        icon-name="utility:favorite" 
+                        variant={starState3}
+                        onmouseover={handleRatingHover}
+                        onmouseout={handleRatingHoverOut}
+                        onclick={handleRatingClick}
+                        data-id="star3">
+                    </lightning-icon>
+                    <lightning-icon 
+                        icon-name="utility:favorite" 
+                        variant={starState4}
+                        onmouseover={handleRatingHover}
+                        onmouseout={handleRatingHoverOut}
+                        onclick={handleRatingClick}
+                        data-id="star4">
+                    </lightning-icon>
+                    <lightning-icon 
+                        icon-name="utility:favorite" 
+                        variant={starState5}
+                        onmouseover={handleRatingHover}
+                        onmouseout={handleRatingHoverOut}
+                        onclick={handleRatingClick}
+                        data-id="star5">
+                    </lightning-icon>
                 </div>
                 <footer class="slds-modal__footer">
-                    <button
+                    <button 
                         class="slds-button slds-button_neutral"
                         onclick={handleCancelButtonClick}>
                         Cancel
                     </button>
-                    <button
+                    <button 
                         class="slds-button slds-button_brand"
                         onclick={handleSubmitButtonClick}>
                         Save
