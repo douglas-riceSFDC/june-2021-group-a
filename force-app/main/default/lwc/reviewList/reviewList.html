@@ -2,26 +2,28 @@
     <div class="slds-grid slds-var-p-around_small">
         <div class="slds-col slds-size_1-of-2">
             <lightning-formatted-text
-                    value="Reviews"
-                    class="slds-text-heading_large">
+                value="Reviews"
+                class="slds-text-heading_large">
             </lightning-formatted-text>
         </div>
         <div class="slds-col slds-size_1-of-2">
             <div class="slds-clearfix">
                 <c-review-submission
                     title={recordId}
-                    class="slds-var-m-right_large slds-float_right
+                    class="slds-var-m-right_large
+                            slds-float_right
                             slds-var-p-left_large">
                 </c-review-submission>
                 <template if:true={averageUserRating}>
-                    <c-star-rating
+                    <c-star-rating-container
                         rating={averageUserRating}
                         class="slds-float_right">
-                    </c-star-rating>
+                    </c-star-rating-container>
                 </template>
                 <lightning-formatted-text
                     value="Average Rating: "
-                    class="slds-text-heading_small slds-float_right
+                    class="slds-text-heading_small
+                            slds-float_right
                             slds-var-p-right_large">
                 </lightning-formatted-text>
             </div>
@@ -46,8 +48,8 @@
                         </lightning-formatted-text>
                     </div>
                     <div slot="actions">
-                        <c-star-rating rating={review.Rating__c}>
-                        </c-star-rating>
+                        <c-star-rating-container rating={review.Rating__c}>
+                        </c-star-rating-container>
                     </div>
                     <div>
                         <lightning-formatted-text
