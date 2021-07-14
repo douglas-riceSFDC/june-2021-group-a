@@ -10,7 +10,9 @@ public with sharing class MovieReviewAuraService {
         ];
     }
 
-    @AuraEnabled
+
+
+    @AuraEnabled (cacheable = true)
     public static void generateMovieReview(ID titleId, ID reviewerId, String review, Integer rating) {
         Movie_Review__c newReview = new Movie_Review__c();
         newReview.Title__c = titleId;
