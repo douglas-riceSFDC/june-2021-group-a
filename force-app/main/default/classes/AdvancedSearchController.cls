@@ -7,6 +7,7 @@ public with sharing class AdvancedSearchController {
         List<Title__c> movieListRecord = new List<Title__c>();
      
 	   // query movie records
+       if(searchKey == ''){return movieListRecord;}
         for(Title__c titleObj : [SELECT id,Name,Director__c,Writer__c,Notable_Actors__c
                             FROM Title__c
                             WHERE name LIKE : searchKeyword OR Director__c LIKE : searchKeyword OR 

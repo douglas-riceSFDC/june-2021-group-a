@@ -74,10 +74,14 @@
                         </lightning-formatted-text>
                     </div>
                     <div slot="actions">
-                        <c-star-rating rating={review.Rating__c}></c-star-rating>
+                        <c-star-rating-container rating={review.Rating__c}>
+                        </c-star-rating-container>
                     </div>
                     <div>
-                        <lightning-formatted-text value={review.Review__c} class="slds-text-body_regular slds-var-p-around_medium">
+                        <lightning-formatted-text
+                            value={review.Review__c}
+                            class="slds-text-body_regular
+                                    slds-var-p-around_medium">
                         </lightning-formatted-text>
                     </div>
                 </lightning-card>

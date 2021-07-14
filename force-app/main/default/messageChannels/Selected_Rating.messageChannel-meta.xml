@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This indicates a star has been clicked to represent a rating</description>
+    <isExposed>true</isExposed>
+    <lightningMessageFields>
+        <description>This is the rating value based on which star was clicked</description>
+        <fieldName>rating</fieldName>
+    </lightningMessageFields>
+    <masterLabel>Selected_Rating</masterLabel>
+</LightningMessageChannel>
