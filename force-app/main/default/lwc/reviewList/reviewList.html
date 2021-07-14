@@ -1,50 +1,76 @@
 <template>
     <div class="slds-grid slds-var-p-around_small">
         <div class="slds-col slds-size_1-of-2">
-            <lightning-formatted-text
-                value="Reviews"
+            <lightning-formatted-text 
+                value="Reviews" 
                 class="slds-text-heading_large">
             </lightning-formatted-text>
         </div>
         <div class="slds-col slds-size_1-of-2">
             <div class="slds-clearfix">
-                <c-review-submission
-                    title={recordId}
-                    class="slds-var-m-right_large
-                            slds-float_right
+                <template if:true={detailsPage}>
+                    <c-review-submission 
+                    title={recordId} 
+                    class="slds-var-m-right_large 
+                            slds-float_right 
                             slds-var-p-left_large">
                 </c-review-submission>
                 <template if:true={averageUserRating}>
-                    <c-star-rating-container
-                        rating={averageUserRating}
+                    <c-star-rating-container 
+                        rating={averageUserRating} 
                         class="slds-float_right">
                     </c-star-rating-container>
                 </template>
-                <lightning-formatted-text
+                <lightning-formatted-text 
                     value="Average Rating: "
-                    class="slds-text-heading_small
-                            slds-float_right
+                    class="slds-text-heading_small 
+                            slds-float_right 
                             slds-var-p-right_large">
                 </lightning-formatted-text>
+                </template>
             </div>
         </div>
     </div>
     <div class="slds-var-p-around_medium">
         <template for:each={reviews} for:item="review">
 			<div key={review.Id} class="slds-var-p-around_small">
-                <lightning-card>
+                <template if:true={detailsPage}>
+                    <lightning-card>
                     <slot></slot>
                     <div slot="title">
-                        <lightning-avatar
+                        <lightning-avatar 
                             size="large"
                             variant="circle"
                             src={review.Reviewer__r.MediumPhotoUrl}
                             fallback-icon-name="standard:user">
                         </lightning-avatar>
-                        <lightning-formatted-text
+                        <lightning-formatted-text 
                             value={review.Reviewer__r.Name}
-                            class="slds-text-heading_medium
+                            class="slds-text-heading_medium 
                                     slds-var-p-left_small">
+                        </lightning-formatted-text>
+                    </div>
+                    <div slot="actions">
+                        <c-star-rating-container rating={review.Rating__c}>
+                        </c-star-rating-container>
+                    </div>
+                    <div>
+                        <lightning-formatted-text 
+                            value={review.Review__c} 
+                            class="slds-text-body_regular 
+                                    slds-var-p-around_medium">
+                        </lightning-formatted-text>
+                    </div>
+                </lightning-card>
+            </template>
+                <template if:false={detailsPage}>
+                    <lightning-card>
+                    <slot></slot>
+                    <div slot="title">
+                        <lightning-avatar size="large" variant="square" src={review.Title__r.Poster__c}
+                                        fallback-icon-name="standard:user" >
+                        </lightning-avatar>
+                        <lightning-formatted-text value={review.Title__r.Name} class="slds-text-heading_medium slds-var-p-left_small">
                         </lightning-formatted-text>
                     </div>
                     <div slot="actions">
@@ -59,6 +85,7 @@
                         </lightning-formatted-text>
                     </div>
                 </lightning-card>
+                </template>
 			</div>
 		</template>
     </div>
