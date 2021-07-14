@@ -1,20 +1,25 @@
-<template>
-    <section>
-        <lightning-combobox
-            name="SortBy"
-            value={sort}
-            placeholder="Sort By"
-            options={sortOptions}
-            onchange={handleChange}>
-        </lightning-combobox>
-    </section>      
-    <section>
-        <lightning-combobox
-            name="Genre"
-            value={genre}
-            placeholder="Genre"
-            options={genreOptions}
-            onchange={handleChange}>
-        </lightning-combobox>
-    </section>   
+<template>    
+    <div class="slds-grid section">
+        <div class="slds-col">
+            <p class="slds-text-heading_medium title ">Browse All</p>
+        </div>
+        <div class="slds-clearfix slds-m-horizontal_xx-small slds-col">
+            <lightning-combobox
+                name="Genre"
+                value={genre}
+                placeholder="Genre"
+                options={genreOptions}
+                onchange={handleChange}>
+            </lightning-combobox>
+        </div>
+        <div class="slds-clearfix slds-m-horizontal_xx-small slds-col">
+            <lightning-combobox
+                name="SortBy"
+                value={sort}
+                placeholder="Sort By"
+                options={sortOptions}
+                onchange={handleChange}>
+            </lightning-combobox>     
+        </div>  
+    </div>       
 </template>
