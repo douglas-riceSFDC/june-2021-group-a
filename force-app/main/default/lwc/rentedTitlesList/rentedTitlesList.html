@@ -24,7 +24,7 @@
                                 <div key={rental.Id} class="slds-m-bottom_medium slds-text-color_destructive">
                                     OVERDUE: <lightning-formatted-date-time year="numeric" month="numeric" day="numeric" time-zone="EST" value={rental.Due_Date__c}>
 
-                                </lightning-formatted-date-time>}</div>
+                                </lightning-formatted-date-time></div>
                             </template>
                             <template if:false={rental.Overdue__c}>
                                 <div key={rental.Id} class="slds-m-bottom_medium">
