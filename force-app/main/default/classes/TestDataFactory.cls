@@ -1,8 +1,21 @@
 public with sharing class TestDataFactory {
-    public static User createUser(String firstName, String lastName) {
-        return new User(FirstName = firstName, LastName = lastName);
+    public static User createUser( String firstName, String lastName) {
+        return new User(
+            FirstName = firstName,
+            LastName = lastName,
+            Username = firstName + '.' + lastname + '@test.net',
+            Email = firstName + '.' + lastname + '@test.net',
+            Alias = firstName.substring(1, 4) + lastName.substring(1,2),
+            TimeZoneSidKey = 'America/New_York',
+            LocaleSidKey = 'en_US',
+            EmailEncodingKey = 'ISO-8859-1',
+            ProfileId = [SELECT Id
+                         FROM Profile
+                         WHERE Name = 'System Administrator'
+                         LIMIT 1].Id,
+            LanguageLocaleKey = 'en_US');
     }
-    
+
     public static Title__c createTitle(String name, String genre) {
         Title__c t = new Title__c();
         t.Name = name;
