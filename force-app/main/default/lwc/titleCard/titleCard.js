@@ -1,20 +1,33 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, wire, track } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
+import { MessageContext } from 'lightning/messageService';
 
-import { publish, MessageContext } from 'lightning/messageService';
-import SELECTED_TITLE_MC from '@salesforce/messageChannel/Selected_Title__c';
 
-export default class TitleCard extends LightningElement {
+export default class TitleCard extends NavigationMixin(LightningElement) {
 	@api title;
-
+	@track availability = 'Available';
 	@wire(MessageContext)
 		messageContext;
 	
-	handleTitleSelection() {
-		console.log("firing event");
-		const payload ={title: this.title};
-		publish(this.messageContext, SELECTED_TITLE_MC, payload);
+	
+	connectedCallback(){
+		this.setAvailability();
 	}
 
+	handleTitleSelection() {
+		this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.title.Id,
+                actionName: 'view'
+            }
+		});
+	}
 
-
+	setAvailability(){
+		if(this.title.Available_Stock__c === 0){
+			this.availability = 'Out of Stock'
+		}
+	}
+	
 }
