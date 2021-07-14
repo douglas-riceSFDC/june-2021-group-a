@@ -37,17 +37,11 @@ private class MovieRecommendationsEngineTest {
 
     @isTest
     static void getRecommendationsTest_givenGenre_expectedTitlesWithGenres() {
-        
-        // Rental__c rentals = createTestData();
-
-        // for (Title__c t : [SELECT Genre__c, Name FROM Title__c]) {
-        //     System.debug(t.Name);
-        //     System.debug(t.Genre__c);
-        // }
         Test.startTest();
-        MovieRecommendationsEngine.getRecommendedMovies();
+        List<Title__c> recommendations = MovieRecommendationsEngine.getRecommendedMovies();
         Test.stopTest();
 
+        System.assertEquals(3, recommendations.size(), 'Incorrect number of recommendations returned');
 
     }
 }

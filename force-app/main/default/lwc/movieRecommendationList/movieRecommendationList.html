@@ -1,3 +1,18 @@
 <template>
-    <p>MOVIE RECOMMENDATION COMPONENT</p>
+    <p class="slds-text-heading_medium title ">AcuMovies Top Picks Based On Your History</p>
+    <br/>
+        <template if:true={movies.data}>
+            <div class="slds-grid slds-gutters">
+                <template for:each={movies.data} for:item="movie">
+                    <div key={movie.Id} class="slds-col slds-size_1-of-6">
+                        <c-title-card title={movie}>
+                            <img class="poster" src={movie.Poster__c} alt={title.Name} />
+                        </c-title-card>
+                    </div>
+                </template>
+            </div> 
+        </template>
+        <template if:false={movies.data}>
+            <h3>Rent some movies and we'll build some recommendations for you!</h3>
+        </template>
 </template>
