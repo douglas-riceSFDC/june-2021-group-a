@@ -6,7 +6,7 @@
     <aura:attribute name="recordError" type="String"/>
     <div class="slds-form-element slds-lookup" data-select="single">
         <div class="slds-form-element__control">
-            <div class="slds-input-has-icon slds-input-has-icon--right">
+            <div class="slds-input-has-icon slds-input-has-icon--right"  onkeyup="{!c.onEnterPressed}">
                 <lightning:buttonIcon iconName="utility:search" variant="bare" onclick="{! c.handleClick }" alternativeText="Search" class="slds-input__icon" />
                 <ui:inputText value="{!v.searchKey}" class="slds-lookup__search-input slds-input" placeholder="Search" />
             </div>
