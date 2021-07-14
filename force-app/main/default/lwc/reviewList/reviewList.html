@@ -61,6 +61,9 @@
                                     slds-var-p-around_medium">
                         </lightning-formatted-text>
                     </div>
+                    <div slot="footer">
+                        <lightning-formatted-date-time year="numeric" month="numeric" day="numeric" time-zone="EST" value={review.CreatedDate}></lightning-formatted-date-time>
+                    </div>
                 </lightning-card>
             </template>
                 <template if:false={detailsPage}>
@@ -83,6 +86,9 @@
                             class="slds-text-body_regular
                                     slds-var-p-around_medium">
                         </lightning-formatted-text>
+                    </div>
+                    <div slot="footer">
+                        <lightning-formatted-date-time year="numeric" month="numeric" day="numeric" time-zone="EST" value={review.CreatedDate}></lightning-formatted-date-time>
                     </div>
                 </lightning-card>
                 </template>

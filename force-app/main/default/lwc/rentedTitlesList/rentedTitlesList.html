@@ -1,20 +1,62 @@
 <template>
     <lightning-card title="Current Rentals" icon-name="standard:orders">
+                <lightning-button-stateful
+                slot="actions"
+        label-when-off="Show Returned"
+        label-when-on="Showing Returned"
+        icon-name-when-off="utility:add"
+        icon-name-when-on="utility:check"
+        icon-name-when-hover="utility:close"
+        selected={isSelected}
+        onclick={handleClick}>
+    </lightning-button-stateful>
         <div class="slds-m-around_medium">
-            <template if:true={rentals.data}>
-                <template for:each={rentals.data} for:item="rental">
+            <template if:true={currentRentals.data}>
+                <template for:each={currentRentals.data} for:item="rental">
                     <div key={rental.Id} class="slds-grid slds-gutters slds-border_bottom">
-                        <div class='slds-col slds-size_5-of-12'>
+                        <div class='slds-col slds-size_6-of-12'>
                             <img class="slds-m-top_x-small slds-m-bottom_x-small" src={rental.Title_Poster__c} alt={rental.Title_Name__c}/>
                         </div>
+                        
                         <div class='slds-col slds-size_7-of-12'>
                             <div key={rental.Id} class="slds-text-heading_small slds-m-top_x-small slds-m-bottom_medium">{rental.Title_Name__c}</div>
                             <template if:true={rental.Overdue__c}>
-                                <div key={rental.Id} class="slds-m-bottom_medium slds-text-color_destructive">OVERDUE: {rental.Due_Date__c}</div>
+                                <div key={rental.Id} class="slds-m-bottom_medium slds-text-color_destructive">
+                                    OVERDUE: <lightning-formatted-date-time year="numeric" month="numeric" day="numeric" time-zone="EST" value={rental.Due_Date__c}>
+
+                                </lightning-formatted-date-time></div>
                             </template>
                             <template if:false={rental.Overdue__c}>
-                                <div key={rental.Id} class="slds-m-bottom_medium">Due: {rental.Due_Date__c}</div>
+                                <div key={rental.Id} class="slds-m-bottom_medium">
+                                    Due:  <lightning-formatted-date-time year="numeric" month="numeric" day="numeric" time-zone="EST" value={rental.Due_Date__c}>
+
+                                    </lightning-formatted-date-time>
+                                </div>
                             </template>
+                        </div>
+                    </div>
+                </template>
+            </template>
+
+
+            <template if:true={isSelected}>
+                <lightning-card title="Returned Rentals" icon-name="standard:orders"></lightning-card>
+                <template for:each={pastRentals.data} for:item="rental">
+                    <div key={rental.Id} class="slds-grid slds-gutters slds-border_bottom">
+                        <div class='slds-col slds-size_6-of-12'>
+                            <img class="slds-m-top_x-small slds-m-bottom_x-small" src={rental.Title_Poster__c} alt={rental.Title_Name__c}/>
+                        </div>
+                        
+                        <div class='slds-col slds-size_7-of-12'>
+                            <div key={rental.Id} class="slds-text-heading_small slds-m-top_x-small slds-m-bottom_medium">{rental.Title_Name__c}</div>
+                            <div key={rental.Id} class="slds-m-bottom_medium">
+                                Rented: <lightning-formatted-date-time year="numeric" month="numeric" day="numeric" time-zone="EST" value={rental.CreatedDate}>
+                                </lightning-formatted-date-time>
+                            </div>
+                            <div key={rental.Id} class="slds-m-bottom_medium">
+                                Returned:  <lightning-formatted-date-time year="numeric" month="numeric" day="numeric" time-zone="EST" value={rental.Date_Returned__c}>
+                                </lightning-formatted-date-time>
+                            </div>
                         </div>
                     </div>
                 </template>

@@ -4,11 +4,12 @@ public with sharing class MovieReviewAuraService {
     public static List<Movie_Review__c> getTitleReviews(ID titleId) {
         return [
             SELECT Name, Rating__c, Review__c, Reviewer__r.Name,
-            Reviewer__r.MediumPhotoURL, Title__c
+            Reviewer__r.MediumPhotoURL, Title__c,CreatedDate
             FROM Movie_Review__c
             WHERE Title__c = :titleId
         ];
     }
+
 
 
     @AuraEnabled (cacheable = true)
@@ -26,8 +27,10 @@ public with sharing class MovieReviewAuraService {
     public static List<Movie_Review__c> generateUserReviews(){
       String uid = UserInfo.getUserId();
         return [
-          SELECT Name, Rating__c, Review__c, Reviewer__r.Name,
-          Reviewer__r.MediumPhotoURL, Title__r.id, Title__r.Name, Title__r.Poster__c
+          SELECT 
+          Name,
+        Rating__c, Review__c, Reviewer__r.Name,
+          Reviewer__r.MediumPhotoURL, Title__r.id, Title__r.Name, Title__r.Poster__c,CreatedDate
           FROM Movie_Review__c
           WHERE Reviewer__r.Id = :uid
       ];
