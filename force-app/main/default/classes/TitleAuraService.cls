@@ -1,5 +1,4 @@
 public with sharing class TitleAuraService {
-  
   @AuraEnabled
   public static List<Title__c> getLatestTitles() {
     return [

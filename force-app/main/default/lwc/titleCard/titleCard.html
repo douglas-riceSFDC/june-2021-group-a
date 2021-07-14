@@ -2,8 +2,8 @@
 	<div onclick={handleTitleSelection}>
 		<lightning-card title={title.Name}>
 			<slot></slot>
-			<div slot="footer">
-				Available {title.Available_Stock__c} / {title.Total_Stock__c}
+			<div class="slds-align_absolute-center" slot="footer">	
+				<p>{availability}</p>
 			</div>
 		</lightning-card>
 	</div>
