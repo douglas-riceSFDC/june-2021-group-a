@@ -1,3 +1,7 @@
-<aura:component>
-
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="isClosed" type="Boolean" default="true" />
+    <aura:if isTrue="{!v.isClosed}">
+        <lightning:button variant="brand-outline" label="Request a Movie" onclick="{!c.handleRequestButtonClick}"/>
+    </aura:if>
+    <lightning:flow aura:id="movieRequest" onstatuschange="{!c.handleStatusChange}"/>
 </aura:component>	
